@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h1>TODO by vanilla-js</h1>
+  <form>
+    <input type="text">
+    <button>OK</button>
+  </form>
+
+  <ol id="list"></ol>
+
+  <script defer>
+    // $('form').submit(function ...)
+    document.querySelector('form').addEventListener('submit', (e) => {
+      e.preventDefault()
+
+      const li = document.createElement('li')
+      li.textContent = e.currentTarget.querySelector('input').value
+
+      li.addEventListener('click', e => {
+        done(e.currentTarget)
+      })
+      li.addEventListener('dblclick', e => {
+        remove(e.currentTarget)
+      })
+
+      document.querySelector('#list').append(li);
+    })
+
+    function done(li) {
+      if (li.style.textDecoration === 'line-through')
+        li.style.textDecoration = ''
+      else
+        li.style.textDecoration = 'line-through'
+    }
+
+    function remove(li) {
+      li.remove()
+    }
+  </script>
+</body>
+
+</html>
